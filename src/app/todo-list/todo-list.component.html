@@ -1,29 +1,107 @@
 <div class="todo-container">
   <h1>待辦清單</h1>
-  <input 
-    type="text" 
-    [(ngModel)]="newTodo" 
-    placeholder="新增任務" 
-    class="todo-input"
-  />
-  <button (click)="addTodo()" class="add-btn">新增</button>
-  <!-- 任務清單 -->
-  <ul class="todo-list">
-    <!-- for迴圈 -->
-    <li *ngFor="let todo of todos; let i = index" [class.completed]="todo.completed">
-      <input 
-        type="checkbox" 
-        [(ngModel)]="todo.completed" 
-        class="checkbox"
-      />
+  
+  <form [formGroup]="todoForm" (ngSubmit)="addTodo()">
+    <div class="form-group">
+      <div class="input-row">
+        <input 
+          type="text" 
+          formControlName="newTodo" 
+          placeholder="新增任務" 
+          class="todo-input"
+        />
+        
+        <input 
+          type="email" 
+          formControlName="email" 
+          placeholder="輸入 Email" 
+          class="email-input"
+        />
 
-      <!-- 編輯模式，顯示編輯框 -->
-      <span *ngIf="!todo.editing">{{ todo.task }}</span>
-      <input *ngIf="todo.editing" [(ngModel)]="todo.task" class="edit-input" (blur)="updateTask(i)" />
+        <button type="submit" 
+                [disabled]="!todoForm.valid" 
+                class="add-btn">
+          新增
+        </button>
+      </div>
 
-      <button *ngIf="!todo.editing" (click)="toggleEdit(i)" class="edit-btn">編輯</button>
-      <button *ngIf="todo.editing" (click)="saveEdit(i)" class="save-btn">儲存</button>
-      <button (click)="deleteTodo(i)" class="delete-btn">刪除</button>
-    </li>
-  </ul>
+      <div class="error-container">
+        <div *ngIf="isFieldInvalid('newTodo')" class="error-message">
+          {{ getErrorMessage('newTodo') }}
+        </div>
+        <div *ngIf="isFieldInvalid('email')" class="error-message">
+          {{ getErrorMessage('email') }}
+        </div>
+      </div>
+    </div>
+
+    <ul class="todo-list" formArrayName="todos">
+      <li *ngFor="let todo of todosArray.controls; let i = index" 
+          [formGroupName]="i"
+          [class.completed]="todo.value.completed">
+        
+        <input 
+          type="checkbox" 
+          formControlName="completed"
+          class="checkbox"
+        />
+
+        <!-- 非編輯模式 -->
+        <ng-container *ngIf="!todo.value.editing">
+          <div class="todo-content">
+            <span class="task">{{ todo.value.task }}</span>
+            <span class="email">{{ todo.value.email }}</span>
+          </div>
+          <div class="button-group">
+            <button type="button" (click)="toggleEdit(i)" class="edit-btn">編輯</button>
+            <button type="button" (click)="deleteTodo(i)" class="delete-btn">刪除</button>
+          </div>
+        </ng-container>
+
+        <!-- 編輯模式 -->
+        <ng-container *ngIf="todo.value.editing">
+          <div class="edit-content">
+            <input 
+              type="text" 
+              formControlName="task"
+              class="edit-input"
+              placeholder="任務"
+            />
+            <input 
+              type="email" 
+              formControlName="email"
+              class="edit-input"
+              placeholder="Email"
+            />
+          </div>
+          <div class="button-group">
+            <button 
+              type="button"
+              (click)="saveEdit(i)"
+              [disabled]="!todo.get('task')?.valid || !todo.get('email')?.valid"
+              class="save-btn">
+              儲存
+            </button>
+            <button 
+              type="button"
+              (click)="cancelEdit(i)"
+              class="cancel-btn">
+              取消
+            </button>
+          </div>
+        </ng-container>
+
+        <div class="error-container" *ngIf="todo.value.editing">
+          <div *ngIf="todo.get('task')?.invalid && todo.get('task')?.touched" 
+               class="error-message">
+            任務為必填
+          </div>
+          <div *ngIf="todo.get('email')?.invalid && todo.get('email')?.touched" 
+               class="error-message">
+            {{ todo.get('email')?.errors?.['pattern'] ? '請輸入有效的 Email 格式' : 'Email 為必填' }}
+          </div>
+        </div>
+      </li>
+    </ul>
+  </form>
 </div>
