@@ -1,0 +1,29 @@
+<div class="todo-container">
+  <h1>待辦清單</h1>
+  <input 
+    type="text" 
+    [(ngModel)]="newTodo" 
+    placeholder="新增任務" 
+    class="todo-input"
+  />
+  <button (click)="addTodo()" class="add-btn">新增</button>
+  <!-- 任務清單 -->
+  <ul class="todo-list">
+    <!-- for迴圈 -->
+    <li *ngFor="let todo of todos; let i = index" [class.completed]="todo.completed">
+      <input 
+        type="checkbox" 
+        [(ngModel)]="todo.completed" 
+        class="checkbox"
+      />
+
+      <!-- 編輯模式，顯示編輯框 -->
+      <span *ngIf="!todo.editing">{{ todo.task }}</span>
+      <input *ngIf="todo.editing" [(ngModel)]="todo.task" class="edit-input" (blur)="updateTask(i)" />
+
+      <button *ngIf="!todo.editing" (click)="toggleEdit(i)" class="edit-btn">編輯</button>
+      <button *ngIf="todo.editing" (click)="saveEdit(i)" class="save-btn">儲存</button>
+      <button (click)="deleteTodo(i)" class="delete-btn">刪除</button>
+    </li>
+  </ul>
+</div>
