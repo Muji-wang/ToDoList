@@ -1,0 +1,45 @@
+<div class="login-container">
+    <h2>登入</h2>
+  
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <div class="form-group">
+        <input 
+          type="email" 
+          placeholder="輸入信箱" 
+          formControlName="email" 
+          class="form-input"
+        />
+        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="error-message">
+          {{ getErrorMessage('email') }}
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <input 
+          type="password" 
+          placeholder="輸入密碼" 
+          formControlName="password" 
+          class="form-input"
+        />
+        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error-message">
+          {{ getErrorMessage('password') }}
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label>
+          <input 
+            type="checkbox" 
+            formControlName="notRobot" 
+          />
+          我不是機器人
+        </label>
+        <div *ngIf="loginForm.get('notRobot')?.invalid && loginForm.get('notRobot')?.touched" class="error-message">
+          必須確認您不是機器人
+        </div>
+      </div>
+  
+      <button type="submit" [disabled]="!loginForm.valid" class="login-btn">登入</button>
+    </form>
+  </div>
+  
