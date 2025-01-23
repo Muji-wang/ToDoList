@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { LoginComponent } from './login/login.component';
 import { AnimeComponent } from './anime/anime.component';
+import { LearningPlanComponent } from './learning-plan/learning-plan.component';
 
 
 @NgModule({
@@ -15,9 +16,11 @@ import { AnimeComponent } from './anime/anime.component';
     AppComponent,
     TodoListComponent,
     LoginComponent,
-    AnimeComponent
+    AnimeComponent,
+    LearningPlanComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     ReactiveFormsModule,
     RouterModule,
