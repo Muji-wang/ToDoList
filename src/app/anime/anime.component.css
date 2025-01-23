@@ -1,0 +1,96 @@
+div.container {
+    margin: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    /* 自動換行 */
+    justify-content: space-between;
+    /* 項目間距均勻分布 */
+    gap: 20px;
+}
+
+
+/* 方塊切換圓形 */
+div.square {
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    border-radius: 0;
+
+    transition-property: border-radius, width, height;
+    transition-duration: 2s;
+
+    transition-delay: 1s;
+    /* 延遲 1 秒 */
+}
+
+div.circle {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}
+
+div.square {
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    border-radius: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition-property: border-radius, width, height;
+    transition-duration: 2s;
+    transition-delay: 0.5s;
+}
+
+div.circle {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}
+
+
+/* 延遲旋轉 */
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+div.animation {
+    border: 1px solid red;
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    text-align: center;
+    vertical-align: top;
+
+    /* 套用 custom_rotation 動畫效果 */
+    animation-name: rotation;
+    animation-duration: 2s;
+}
+
+div.-delay {
+    animation-delay: 2s;
+    /* 先等待 2 秒再執行 */
+}
+
+.hi {
+    width: 167px;
+    height: 165px;
+    background-image: url("../../assets/image0012.jpg");
+                        animation: play 2s steps(12) infinite alternate;
+}
+
+@keyframes play {
+   from { background-position:    0px; }
+     to { background-position: -1999px; }
+}
