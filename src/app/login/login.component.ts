@@ -22,8 +22,12 @@ export class LoginComponent {
 
   onLogin() {
     if (this.loginForm.valid) {
-      this.router.navigate(['/todo-list']);
+      localStorage.setItem('token', 'mock-token'); // 儲存模擬 token
+      this.router.navigate(['/todo-list']); // 登入成功後跳轉至默認頁面
+    } else {
+      alert('Invalid credentials'); // 顯示錯誤訊息
     }
+    
   }
 
   getErrorMessage(fieldName: string): string {

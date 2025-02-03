@@ -9,6 +9,7 @@ import { TodoListComponent } from './todo-list/todo-list.component';
 import { LoginComponent } from './login/login.component';
 import { AnimeComponent } from './anime/anime.component';
 import { LearningPlanComponent } from './learning-plan/learning-plan.component';
+import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { LearningPlanComponent } from './learning-plan/learning-plan.component';
     TodoListComponent,
     LoginComponent,
     AnimeComponent,
-    LearningPlanComponent
+    LearningPlanComponent,
+    NavigationBarComponent
   ],
   imports: [
     FormsModule,
