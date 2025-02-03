@@ -5,6 +5,9 @@ import { TodoListComponent } from './todo-list/todo-list.component';
 import { AnimeComponent } from './anime/anime.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { LearningPlanComponent } from './learning-plan/learning-plan.component';
+import { ComponentAComponent } from './component-a/component-a.component';
+import { ComponentBComponent } from './component-b/component-b.component';
+import { CounterPageComponent } from './counter-page/counter-page.component';
 import { AuthGuard } from './auth/auth.guard'; // Import the guard
 
 
@@ -17,6 +20,7 @@ const routes: Routes = [
       { path: 'todo-list', component: TodoListComponent },
       { path: 'anime', component: AnimeComponent },
       { path: 'learning-plan', component: LearningPlanComponent },
+      { path: 'counter', component: CounterPageComponent }, // 新增計數器頁面
     ],
   },
   { path: 'login', component: LoginComponent }, // 登入頁面（無需守衛）

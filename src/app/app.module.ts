@@ -10,6 +10,10 @@ import { LoginComponent } from './login/login.component';
 import { AnimeComponent } from './anime/anime.component';
 import { LearningPlanComponent } from './learning-plan/learning-plan.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
+import { ComponentAComponent } from './component-a/component-a.component';
+import { ComponentBComponent } from './component-b/component-b.component';
+import { CounterPageComponent } from './counter-page/counter-page.component';
+
 
 
 @NgModule({
@@ -19,7 +23,10 @@ import { NavigationBarComponent } from './navigation-bar/navigation-bar.componen
     LoginComponent,
     AnimeComponent,
     LearningPlanComponent,
-    NavigationBarComponent
+    NavigationBarComponent,
+    ComponentAComponent,
+    ComponentBComponent,
+    CounterPageComponent
   ],
   imports: [
     FormsModule,
