@@ -1,0 +1,19 @@
+<nav class="navigation-bar">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a routerLink="/todo-list" routerLinkActive="active">Todo List</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/anime" routerLinkActive="active">Anime</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/learning-plan" routerLinkActive="active">Learning Plan</a>
+      </li>
+      <li class="nav-item logout">
+        <button (click)="logout()" class="logout-button">Logout</button>
+      </li>
+    </ul>
+  </nav>
+  
+  <!-- 用於顯示子路由 -->
+<router-outlet></router-outlet>
