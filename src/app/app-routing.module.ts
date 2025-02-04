@@ -8,6 +8,7 @@ import { LearningPlanComponent } from './learning-plan/learning-plan.component';
 import { ComponentAComponent } from './component-a/component-a.component';
 import { ComponentBComponent } from './component-b/component-b.component';
 import { CounterPageComponent } from './counter-page/counter-page.component';
+import { EnterDataComponent } from './enter-data/enter-data.component';
 import { AuthGuard } from './auth/auth.guard'; // Import the guard
 
 
@@ -21,6 +22,7 @@ const routes: Routes = [
       { path: 'anime', component: AnimeComponent },
       { path: 'learning-plan', component: LearningPlanComponent },
       { path: 'counter', component: CounterPageComponent }, // 新增計數器頁面
+      { path: 'enter-data', component: EnterDataComponent },// 新增輸入資料頁面w
     ],
   },
   { path: 'login', component: LoginComponent }, // 登入頁面（無需守衛）
