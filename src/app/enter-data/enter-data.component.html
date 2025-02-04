@@ -1,77 +1,61 @@
 <div class="container mt-5">
-    <form [formGroup]="userForm" (ngSubmit)="submitForm()">
+    <form *ngIf="!submittedData" [formGroup]="userForm" (ngSubmit)="submitForm()">
         <li class="form-group">
             <label>姓名:
-                <input formControlName="name">
+              <input formControlName="name">
             </label>
             <div *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched">
-                必須至少 2 個字元
+              必須至少 2 個字元
             </div>
         </li>
         <li>
             <label>性別:
-                <input type="radio" formControlName="gender" value="male"> 男
-                <input type="radio" formControlName="gender" value="female"> 女
+              <input type="radio" formControlName="gender" value="male"> 男
+              <input type="radio" formControlName="gender" value="female"> 女
             </label>
         </li>
-
+        
         <li>
             <label>國家:
-                <select formControlName="country">
-                    <option value="" disabled>請選擇國家</option>
-                    <option *ngFor="let country of countryOptions" [value]="country">{{ country }}</option>
-                </select>
+              <select formControlName="country">
+                <option value="" disabled>請選擇國家</option>
+                <option *ngFor="let country of countryOptions" [value]="country">{{ country }}</option>
+              </select>
             </label>
         </li>
         <div *ngIf="selectedRegion$ | async as regions">
             <li>
                 <label *ngIf="regions.length">地區:
-                    <select formControlName="region">
-                        <option value="" disabled>請選擇地區</option>
-                        <option *ngFor="let region of regions" [value]="region">{{ region }}</option>
-                    </select>
+                  <select formControlName="region">
+                    <option value="" disabled>請選擇地區</option>
+                    <option *ngFor="let region of regions" [value]="region">{{ region }}</option>
+                  </select>
                 </label>
             </li>
         </div>
-
+        
         <label>
-            <input type="checkbox" formControlName="terms"> 我同意使用條款
+          <input type="checkbox" formControlName="terms"> 我同意使用條款
         </label>
         <div *ngIf="userForm.get('terms')?.invalid && userForm.get('terms')?.touched">
-            必須同意使用條款
+          必須同意使用條款
         </div>
-        <br />
+        <br/>
         <div class="row p-3 gap-1">
-            <button class=" btn btn-primary col-2" type="submit">{{ editingIndex !== null ? '更新' : '提交' }}</button>
+            <button class=" btn btn-primary col-2" type="submit">提交</button>
             <button class=" btn btn-primary col-2" type="button" (click)="exportJson()">匯出 JSON</button>
         </div>
     </form>
-
-    <div *ngIf="submittedDataList.length">
+    
+    <div *ngIf="submittedData">
         <h3>提交結果</h3>
         <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>姓名</th>
-                    <th>性別</th>
-                    <th>國家</th>
-                    <th>地區</th>
-                    <th>同意條款</th>
-                    <th>操作</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let data of submittedDataList; let i = index">
-                    <td>{{ data.name }}</td>
-                    <td>{{ data.gender ? '男' : '女' }}</td>
-                    <td>{{ data.country }}</td>
-                    <td>{{ data.region }}</td>
-                    <td>{{ data.terms ? '是' : '否' }}</td>
-                    <td>
-                        <button class="btn btn-secondary" (click)="editForm(i)">修改</button>
-                    </td>
-                </tr>
-            </tbody>
+            <tr><th>姓名</th><td>{{ submittedData.name }}</td></tr>
+            <tr><th>性別</th><td>{{ submittedData.gender }}</td></tr>
+            <tr><th>國家</th><td>{{ submittedData.country }}</td></tr>
+            <tr *ngIf="submittedData.region"><th>地區</th><td>{{ submittedData.region }}</td></tr>
+            <tr><th>同意條款</th><td>{{ submittedData.terms ? '是' : '否' }}</td></tr>
         </table>
+        <button class="btn btn-secondary" (click)="editForm()">修改</button>
     </div>
 </div>
