@@ -13,6 +13,7 @@ import { NavigationBarComponent } from './navigation-bar/navigation-bar.componen
 import { ComponentAComponent } from './component-a/component-a.component';
 import { ComponentBComponent } from './component-b/component-b.component';
 import { CounterPageComponent } from './counter-page/counter-page.component';
+import { EnterDataComponent } from './enter-data/enter-data.component';
 
 
 
@@ -26,7 +27,8 @@ import { CounterPageComponent } from './counter-page/counter-page.component';
     NavigationBarComponent,
     ComponentAComponent,
     ComponentBComponent,
-    CounterPageComponent
+    CounterPageComponent,
+    EnterDataComponent
   ],
   imports: [
     FormsModule,
