@@ -1,0 +1,40 @@
+<form [formGroup]="userForm" (ngSubmit)="submitForm()">
+  <div class="form-group">
+    <label>姓名: <input formControlName="name"></label>
+    <div *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched">
+      必須至少 2 個字元
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>性別:</label>
+    <input type="radio" formControlName="gender" value="male"> 男
+    <input type="radio" formControlName="gender" value="female"> 女
+  </div>
+
+  <div class="form-group">
+    <label>國家:
+      <select formControlName="country">
+        <option value="" disabled>請選擇國家</option>
+        <option *ngFor="let country of countryOptions" [value]="country">
+          {{ country }}
+        </option>
+      </select>
+    </label>
+  </div>
+
+  <div class="form-group" *ngIf="selectedRegion$ | async as regions">
+    <label *ngIf="regions.length">地區:
+      <select formControlName="region">
+        <option value="" disabled>請選擇地區</option>
+        <option *ngFor="let region of regions" [value]="region">{{ region }}</option>
+      </select>
+    </label>
+  </div>
+
+  <label>
+    <input type="checkbox" formControlName="terms"> 我同意使用條款
+  </label>
+
+  <button class="btn btn-primary" type="submit">提交</button>
+</form>

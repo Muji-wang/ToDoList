@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-md-8">
+    <app-enter-data (dataSubmitted)="addPersonData($event)"></app-enter-data>
+
+    <!-- 只有當 personDataList 有內容時才顯示 -->
+    <app-data-edit *ngIf="personDataList && personDataList.controls && personDataList.controls.length > 0"
+      [personDataList]="personDataList">
+</app-data-edit>
+  </div>
+
+  <div class="col-md-4">
+    <!-- 只有當 lockedDataList 有內容時才顯示 -->
+    <app-data-list *ngIf="lockedDataList?.length" [lockedDataList]="lockedDataList"></app-data-list>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<div *ngIf="personDataList && personDataList.controls && personDataList.controls.length">
+  <h3>可編輯的資料</h3>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>姓名</th>
+        <th>性別</th>
+        <th>國家</th>
+        <th>地區</th>
+        <th>同意條款</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let control of personDataList.controls; let i = index" [formGroup]="control">
+        <td *ngIf="!control.get('editing')?.value">{{ control.get('name')?.value }}</td>
+        <td *ngIf="control.get('editing')?.value"><input formControlName="name"></td>
+
+        <td>{{ control.get('gender')?.value }}</td>
+        <td>{{ control.get('country')?.value }}</td>
+        <td>{{ control.get('region')?.value }}</td>
+        <td>{{ control.get('terms')?.value ? '是' : '否' }}</td>
+        <td>
+          <button class="btn btn-secondary" *ngIf="!control.get('editing')?.value" (click)="editItem(i)">修改</button>
+          <button class="btn btn-success" *ngIf="control.get('editing')?.value" (click)="saveItem(i)">保存</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
