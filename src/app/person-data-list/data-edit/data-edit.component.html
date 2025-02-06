@@ -1,30 +1,73 @@
-<div *ngIf="personDataList && personDataList.controls && personDataList.controls.length">
-  <h3>可編輯的資料</h3>
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>姓名</th>
-        <th>性別</th>
-        <th>國家</th>
-        <th>地區</th>
-        <th>同意條款</th>
-        <th>操作</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let control of personDataList.controls; let i = index" [formGroup]="control">
-        <td *ngIf="!control.get('editing')?.value">{{ control.get('name')?.value }}</td>
-        <td *ngIf="control.get('editing')?.value"><input formControlName="name"></td>
+<div class="card flex-fill mt-2 overflow-auto">
+  <div class="card-header bg-light">
+    <h4 class="mb-0">提交結果</h4>
+  </div>
+  <div class="card-body overflow-auto">
+    <div class="table-responsive">
+      <table class="table table-hover table-bordered w-100">
+        <thead class="table-light">
+          <tr>
+            <th class="text-center align-middle" style="width: 120px;">姓名</th>
+            <th class="text-center align-middle" style="width: 100px;">性別</th>
+            <th class="text-center align-middle" style="width: 150px;">國家</th>
+            <th class="text-center align-middle" style="width: 180px;">地區</th>
+            <th class="text-center align-middle" style="width: 100px;">同意條款</th>
+            <th class="text-center align-middle" style="width: 140px;">操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of submittedData; let i = index">
+            <!-- 姓名 -->
+            <td class="text-start align-middle">
+              <span *ngIf="!isEditing[i]">{{ data.name }}</span>
+              <input *ngIf="isEditing[i]" [(ngModel)]="data.name" class="form-control form-control-sm w-100"
+                     [ngClass]="{'is-invalid': isEditing[i] && !data.name}" required>
+            </td>
 
-        <td>{{ control.get('gender')?.value }}</td>
-        <td>{{ control.get('country')?.value }}</td>
-        <td>{{ control.get('region')?.value }}</td>
-        <td>{{ control.get('terms')?.value ? '是' : '否' }}</td>
-        <td>
-          <button class="btn btn-secondary" *ngIf="!control.get('editing')?.value" (click)="editItem(i)">修改</button>
-          <button class="btn btn-success" *ngIf="control.get('editing')?.value" (click)="saveItem(i)">保存</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+            <!-- 性別 -->
+            <td class="text-center align-middle">
+              <span *ngIf="!isEditing[i]">{{ data.gender }}</span>
+              <select *ngIf="isEditing[i]" [(ngModel)]="data.gender" class="form-select form-select-sm w-100">
+                <option value="male">male</option>
+                <option value="female">female</option>
+              </select>
+            </td>
+
+            <!-- 國家 -->
+            <td class="text-start align-middle">
+              <span *ngIf="!isEditing[i]">{{ data.country }}</span>
+              <select *ngIf="isEditing[i]" [(ngModel)]="data.country" (change)="updateRegionOptions(i)" 
+                      class="form-select form-select-sm w-100">
+                <option *ngFor="let country of countryOptions" [value]="country">{{ country }}</option>
+              </select>
+            </td>
+
+            <!-- 地區 -->
+            <td class="text-start align-middle">
+              <span *ngIf="!isEditing[i]">{{ data.region }}</span>
+              <select *ngIf="isEditing[i]" [(ngModel)]="data.region" class="form-select form-select-sm w-100"
+                      [ngClass]="{'is-invalid': isEditing[i] && !data.region}" required>
+                <option *ngFor="let region of availableRegions[i]" [value]="region">{{ region }}</option>
+              </select>
+            </td>
+
+            <!-- 同意條款 -->
+            <td class="text-center align-middle">
+              {{ data.terms ? '是' : '否' }}
+            </td>
+
+            <!-- 操作按鈕 -->
+            <td class="text-center align-middle">
+              <div class="btn-group btn-group-sm">
+                <button *ngIf="!isEditing[i]" class="btn btn-outline-primary btn-sm" (click)="startEditing(i)">修改</button>
+                <button *ngIf="isEditing[i]" class="btn btn-success btn-sm"
+                        (click)="confirmEdit(i)" [disabled]="!data.name || !data.region">確認</button>
+                <button class="btn btn-outline-danger btn-sm" (click)="deleteForm(i)">刪除</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

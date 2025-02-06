@@ -1,0 +1,28 @@
+.card {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .card-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 300px;
+  }
+  
+  .table-responsive {
+    flex-grow: 1;
+    overflow: auto;
+    min-width: 100%;
+  }
+  
+  .table {
+    table-layout: auto !important; /* 讓表格根據內容自適應 */
+    min-width: 800px;
+  }
+  
+  th, td {
+    white-space: normal; /* 允許換行，避免內容隱藏 */
+    overflow: visible; /* 確保內容可以完整顯示 */
+  }
+  

@@ -6,15 +6,15 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./data-list.component.css']
 })
 export class DataListComponent {
-  @Input() lockedDataList: any[] = [];
+  @Input() dataList: any[] = [];
 
   exportJson() {
-    const jsonStr = JSON.stringify(this.lockedDataList, null, 2);
+    const jsonStr = JSON.stringify(this.dataList, null, 2);
     const blob = new Blob([jsonStr], { type: 'application/json' });
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'person-data.json';
+    a.download = 'form-data.json';
     a.click();
     window.URL.revokeObjectURL(url);
   }

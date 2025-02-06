@@ -1,24 +1,35 @@
-<div *ngIf="lockedDataList.length">
-  <h3>已提交的資料（鎖定）</h3>
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>姓名</th>
-        <th>性別</th>
-        <th>國家</th>
-        <th>地區</th>
-        <th>同意條款</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let data of lockedDataList">
-        <td>{{ data.name }}</td>
-        <td>{{ data.gender }}</td>
-        <td>{{ data.country }}</td>
-        <td>{{ data.region }}</td>
-        <td>{{ data.terms ? '是' : '否' }}</td>
-      </tr>
-    </tbody>
-  </table>
-  <button class="btn btn-primary" (click)="exportJson()">匯出 JSON</button>
+<div class="data-list-container">
+ 
+    <div class="card flex-fill h-100">
+      <div class="card-header bg-light">
+        <h2 class="mb-0 text-danger text-center">資料總表</h2>
+      </div>
+
+
+      <div class="table-responsive">
+        <table class="table table-bordered w-100">
+          <thead>
+            <tr>
+              <th class="text-center">姓名</th>
+              <th class="text-center">性別</th>
+              <th class="text-center">國家</th>
+              <th class="text-center">地區</th>
+              <th class="text-center">同意條款</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of dataList">
+              <td class="text-center">{{ data.name }}</td>
+              <td class="text-center">{{ data.gender }}</td>
+              <td class="text-center">{{ data.country }}</td>
+              <td class="text-center">{{ data.region }}</td>
+              <td class="text-center">{{ data.terms ? '是' : '否' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <button class="btn btn-primary w-100 mt-3" (click)="exportJson()">匯出 JSON</button>
+    </div>
+  
 </div>
