@@ -13,7 +13,10 @@ import { NavigationBarComponent } from './navigation-bar/navigation-bar.componen
 import { ComponentAComponent } from './component-a/component-a.component';
 import { ComponentBComponent } from './component-b/component-b.component';
 import { CounterPageComponent } from './counter-page/counter-page.component';
-import { EnterDataComponent } from './enter-data/enter-data.component';
+import { EnterDataComponent } from './person-data-list/enter-data/enter-data.component';
+import { DataListComponent } from './person-data-list/data-list/data-list.component';
+import { PersonDataListComponent } from './person-data-list/person-data-list.component';
+import { DataEditComponent } from './person-data-list/data-edit/data-edit.component';
 
 
 
@@ -28,7 +31,10 @@ import { EnterDataComponent } from './enter-data/enter-data.component';
     ComponentAComponent,
     ComponentBComponent,
     CounterPageComponent,
-    EnterDataComponent
+    EnterDataComponent,
+    DataListComponent,
+    PersonDataListComponent,
+    DataEditComponent
   ],
   imports: [
     FormsModule,

@@ -1,0 +1,21 @@
+.form-group {
+    margin-bottom: 15px; /* 讓每個選項有間距 */
+  }
+  
+  .form-control {
+    width: 100%; /* 讓輸入框和下拉選單佔滿整行 */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .text-danger {
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  .btn-primary {
+    font-size: 16px;
+    padding: 10px;
+  }
+  
